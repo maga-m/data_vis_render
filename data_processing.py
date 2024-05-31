@@ -66,10 +66,7 @@ def get_taxes(column):
     return taxes
 
 categories= ['num_beds', "Star_Rating", 'no_prepayment', 'Cancelation', 'Max_persons']
-def numeric_columns(df, categories):
-    numerical_types = df.select_dtypes(include = [float]).columns.to_list()
-    numerical_cols = numerical_types+categories
-    return numerical_cols
+
 
 def number_of_hotels(df):
     return len(df)
@@ -80,7 +77,8 @@ def average_price(df):
 df = load_data(relative_path)
 df = preprocess_data(df)
 
-numeric_columns = numeric_columns(df, categories)
+numeric_columns = ['Price', 'Customers_Rating', 'Customers_Review', 'Tax', 'Longitude_x', 'Latitude_y', 'log_price', 'num_beds', 'Star_Rating', 'no_prepayment', 'Cancelation', 'Max_persons']
+
 
 
 def group_cities(df, threshold=10):
