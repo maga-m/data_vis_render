@@ -1,5 +1,9 @@
 import numpy as np
 import pandas as pd
+import os
+
+script_dir = os.path.dirname(__file__)
+relative_path = os.path.join(script_dir, '..', 'data', 'vis_data.csv')
 
 def load_data(filepath):
     try:
@@ -62,10 +66,7 @@ def get_taxes(column):
     return taxes
 
 categories= ['num_beds', "Star_Rating", 'no_prepayment', 'Cancelation', 'Max_persons']
-def numeric_columns(df, categories):
-    numerical_types = df.select_dtypes(include = [float]).columns.to_list()
-    numerical_cols = numerical_types+categories
-    return numerical_cols
+
 
 def number_of_hotels(df):
     return len(df)
@@ -73,10 +74,11 @@ def number_of_hotels(df):
 def average_price(df):
     return df['Price'].mean().round(2)
 
-df = load_data(r'C:\Users\user\Desktop\data_vis\data\vis_data.csv')
+df = load_data(relative_path)
 df = preprocess_data(df)
 
-numeric_columns = numeric_columns(df, categories)
+numeric_columns = ['Price', 'Customers_Rating', 'Customers_Review', 'Tax', 'Longitude_x', 'Latitude_y', 'log_price', 'num_beds', 'Star_Rating', 'no_prepayment', 'Cancelation', 'Max_persons']
+
 
 
 def group_cities(df, threshold=10):
